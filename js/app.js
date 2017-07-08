@@ -1,6 +1,6 @@
 let React = require("react")
 let ReactDOM = require("react-dom")
 
-import Hello from './components/Hello'
+import Main from './components/Main'
 
-ReactDOM.render(<Hello />, document.getElementById("react"));
+ReactDOM.render(<Main />, document.getElementById("react"));
