@@ -3,9 +3,8 @@
   "version": "0.0.1",
   "description": "RGR tuto.",
   "scripts": {
-    "start": "babel-node --presets react,es2015 server.js"
+    "start": "./node_modules/.bin/babel-node --presets react,es2015 server.js"
   },
-  "main": "server.js",
   "repository": "",
   "author": "Andres Alfaro <alfie@iwasboredoneday.com>",
   "dependencies": {
@@ -17,12 +16,17 @@
     "babel-preset-react": "^6.24.1",
     "events": "^1.1.1",
     "express": "^4.15.3",
+    "express-graphql": "^0.4.5",
     "flux": "^3.1.2",
+    "graphql": "^0.4.14",
     "jquery": "^3.2.1",
     "kerberos": "0.0.23",
     "mongodb": "^2.2.30",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
     "webpack": "^3.1.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.24.1"
   }
 }

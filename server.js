@@ -1,12 +1,18 @@
 "use strict"
+import schema from './data/schema';
 var express = require('express');
 var path = require('path');
 let MongoClient = require("mongodb").MongoClient
+let GraphQLHTTP = require('express-graphql');
 
 let app = express();
 let db;
 
+
 app.use(express.static(path.resolve(__dirname, 'public')));
+app.use('/graphql', GraphQLHTTP({
+    schema
+}));
 MongoClient.connect(process.env.MONGO_URL, (err, database) => {
    if (err) throw err
    
