@@ -5,8 +5,12 @@
   "scripts": {
     "start": "./node_modules/.bin/babel-node --presets react,es2015 server.js"
   },
-  "repository": "",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AAlfarho/rgr.git"
+  },
   "author": "Andres Alfaro <alfie@iwasboredoneday.com>",
+  "license": "ISC",
   "dependencies": {
     "babel": "^6.23.0",
     "babel-cli": "^6.24.1",
@@ -16,9 +20,9 @@
     "babel-preset-react": "^6.24.1",
     "events": "^1.1.1",
     "express": "^4.15.3",
-    "express-graphql": "^0.4.5",
+    "express-graphql": "^0.4.13",
     "flux": "^3.1.2",
-    "graphql": "^0.4.14",
+    "graphql": "^0.4.18",
     "jquery": "^3.2.1",
     "kerberos": "0.0.23",
     "mongodb": "^2.2.30",
