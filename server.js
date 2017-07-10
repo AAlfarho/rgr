@@ -1,9 +1,15 @@
 "use strict"
+//var schema = require('./data/schema');
+//var express = require('express');
+//var path = require('path');
+//let MongoClient = require("mongodb").MongoClient
+//let GraphQLHTTP = require('express-graphql');
 import schema from './data/schema';
-var express = require('express');
-var path = require('path');
-let MongoClient = require("mongodb").MongoClient
-let GraphQLHTTP = require('express-graphql');
+import express  from 'express';
+import path from 'path';
+import {MongoClient} from 'mongodb';
+import GraphQLHTTP from 'express-graphql'
+
 
 let app = express();
 let db;
