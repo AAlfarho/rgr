@@ -3,4 +3,4 @@ let ReactDOM = require("react-dom")
 
 import Main from './components/Main'
 
-ReactDOM.render(<Main />, document.getElementById("react"));
+ReactDOM.render(<Main limit={2} />, document.getElementById("react"));
