@@ -1,54 +1,16 @@
 import React from 'react';
-import MongoAPI from '../MongoAPI';
-import LinkStore from "../stores/LinkStore"
-import PropTypes from 'prop-types';
-
-let _getAppState = () => {
-    return { links: LinkStore.getAll() }  
-};
+import Relay from "react-relay";
 
 class Main extends React.Component {
-    static propTypes = {
-    limit: PropTypes.number
-    }
-    
-    static defaultProps = {
-        limit: 4
-    }
-    
-    state = _getAppState();
-    
+
     /*
-        Got rid of constructor as we were only using it for the binding, however
-        using stage-0 es5 allows us for arrow anonymus function which binds it
+    The use of realy makes the state and the onchange, mount, unmount innecessary as that was
+    vanilla flux patter, now we have relay.
+    Relay will manage the state for us in the form of props
     */
-    // constructor(props){
-    //     super(props);
-        
-    //     //ES6 does not have autobind so we need to bind our onChange
-    //     //however the bind will always return a function, so we need to keep 
-    //     //track of such function in order to avoid leaks when removing the 
-    //     //listener, for more info go to https://hjnilsson.com/2016/04/17/addChangeListener-removeChangeListener-bind-and-unbind/
-    //     this._onChange = this.onChange.bind(this);
-    // }
-    
-    onChange = () => {
-        console.log("In the view, on change")
-        this.setState(_getAppState());
-    }
-    
-    componentDidMount() {
-        MongoAPI.fetchLinks();
-        //because arrow function we dont need to bind the onchange hence the
-        LinkStore.on('change', this.onChange)
-    }
-    
-    componentWillUnmount() {
-        LinkStore.removeListener("change", this.onChange)
-    }
     
     render(){
-        let link_component = this.state.links.slice(0, this.props.limit).map(link => {
+        let link_component = this.props.store.links.map(link => {
             return  <li key={link._id}>
                         <a href={link.url}>{link.title}</a>
                     </li>
@@ -64,5 +26,18 @@ class Main extends React.Component {
     }
 }
 
+Main = Relay.createContainer(Main, {
+    fragments: {
+        store: () => Relay.QL`
+        fragment on Store {
+            links{
+                _id,
+                title,
+                url
+            }
+        }
+        `
+    }
+});
 
 export default Main

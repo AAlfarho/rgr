@@ -7,6 +7,19 @@ import {
 } from 'graphql';
 
 let Schema = (db) => {
+    
+     
+    let RootStore = {}
+    let LinkStoreType = new GraphQLObjectType({
+            name: 'Store',
+            fields: () => ({
+                links: {
+                    type: new GraphQLList(LinkType),
+                    resolve: () => db.collection('links').find({}).toArray()
+                }
+            })
+        })
+    
     let LinkType = new GraphQLObjectType({
         name: 'Link',
         fields: () => ({
@@ -20,9 +33,9 @@ let Schema = (db) => {
         query: new GraphQLObjectType({
             name: 'Query',
             fields: () => ({
-                links: {
-                    type: new GraphQLList(LinkType),
-                    resolve: () => db.collection('links').find({}).toArray()
+                store: {
+                    type: LinkStoreType,
+                    resolve: () => RootStore
                 }
             })
         })
